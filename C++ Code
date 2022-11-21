@@ -1,0 +1,244 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+class User {
+	User(){
+
+	};
+
+	~User(){
+
+	};
+
+private:
+	string username;
+	string type;
+	string phone;
+	string address;
+	string email;
+	string name;
+	
+public:
+	string getName();
+	string getType();
+	string getPhone();
+	string getEmail();
+	string getAddress();
+
+	string setName();
+	string setType();
+	string setPhone();
+	string setEmail();
+	string setAddress();
+
+	string setName(string n) {
+		name = n;
+	}
+
+	string setType(string t) {
+		type = t; 
+	}
+
+	string setPhone(string p) {
+		phone = p; //Alternative variable may be needed
+	}
+
+	string setEmail(string e) {
+		email = e;
+	}
+
+	string setAddress(string a) {
+		address = a;
+	}
+
+	string getName() {
+		return name;
+	}
+	string getType() {
+		return type;
+	}
+	string getPhone() {
+		return phone;
+	}
+	string getEmail() {
+		return email;
+	}
+	string getAddress() {
+		return address;
+	}
+	
+	bool Type();
+	string login();
+	void DeleteAccount();
+	void CreateAccount();
+	
+
+};
+
+void User::DeleteAccount() {
+
+}
+
+void User::CreateAccount() {
+	//Client or Contractor (Buttons)
+	setType();
+
+	//Textbox
+	setName();
+	setPhone();
+	setEmail();
+	setAddress();
+
+	Type();
+
+	ofstream account;
+	account.open("User.txt");
+
+	//Make account file
+
+}
+
+bool Type() {
+	getType();
+	if (type == "customer") {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+class Job{
+
+	Job() {
+
+	};
+
+	~Job() {
+
+	};
+
+private:
+	int time;
+	int status;
+	int price;
+	string desc;
+	string location;
+	string title;
+
+public:
+	int getTime(); //Grab from computer clock
+	string getLocation();
+	int getPrice();
+	int getStatus();
+	string getDesc();
+	string getTitle();
+
+	int setTime();
+	string setLocation();
+	int setPrice();
+	int setStatus();
+	string setDesc();
+	string setTitle();
+
+	int setTime(int t) {
+		time = t;
+	}
+	string setLocation(string l) {
+		location = l;
+	}
+	int setPrice(int p) {
+		price = p;
+	}
+	int setStatus(int s) {
+		status = s;
+	}
+	string setDesc(string d) {
+		desc = d;
+	}
+	string setTitle(string t) {
+		title = t; //Alternative variable may be needed
+	}
+
+	int getTime() {
+		return time;
+	}
+	string getLocation() {
+		return location;
+	}
+	int getPrice() {
+		return price;
+	}
+	int getStatus() {
+		return status;
+	}
+	string getDesc() {
+		return desc;
+	}
+	string getTitle() {
+		return title;
+	}
+
+}
+
+int Filter() {
+
+	int filter;
+
+	if (filter = 1) {
+		//
+	}
+	if (filter = 2) {
+		//
+	}
+	if (filter = 3) {
+		//
+	}
+}
+
+void ViewJob() {
+
+	ifstream joblist;
+
+	string line;
+	joblist.open("Jobs.txt");
+	while (getline(joblist, line)) {
+			cout << line << '\n';
+		}
+		joblist.close();
+
+		if (joblist.close()) {
+			//Go to account dashboard
+		}
+}
+
+void AddJob() {
+
+	ofstream joblist;
+	
+	if (joblist.open()) {
+		joblist << " \n";
+			joblist.close();
+	}
+
+	else {
+		cout << "Error";
+		return 0; //To account dashboard
+	}
+
+}
+
+int main() {
+
+	//Insert file info
+
+	Job job;
+
+	job.AddJob(" ");
+
+	job.ViewJob(" ");
+
+	return 0;
+}
