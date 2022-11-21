@@ -52,30 +52,27 @@ public:
 	string setAddress(string a) {
 		address = a;
 	}
-
-	string getName() {
-		return name;
-	}
-	string getType() {
-		return type;
-	}
-	string getPhone() {
-		return phone;
-	}
-	string getEmail() {
-		return email;
-	}
-	string getAddress() {
-		return address;
-	}
-	
 	bool Type();
 	string login();
 	void DeleteAccount();
 	void CreateAccount();
-	
-
 };
+//	
+	string User::getName() {
+		return name;
+	}
+	string User::getType() {
+		return type;
+	}
+	string User::getPhone() {
+		return phone;
+	}
+	string User::getEmail() {
+		return email;
+	}
+	string User::getAddress() {
+		return address;
+	}
 
 void User::DeleteAccount() {
 
@@ -161,26 +158,23 @@ public:
 	string setTitle(string t) {
 		title = t; //Alternative variable may be needed
 	}
-
-	int getTime() {
+//	
+	}
+	int Job::getTime() {
 		return time;
 	}
-	string getLocation() {
+	string Job::getLocation() {
 		return location;
 	}
-	int getPrice() {
+	int Job::getPrice() {
 		return price;
 	}
-	int getStatus() {
+	int Job::getStatus() {
 		return status;
 	}
-	string getDesc() {
+	string Job::getDesc() {
 		return desc;
 	}
-	string getTitle() {
-		return title;
-	}
-
 }
 
 int Filter() {
@@ -188,13 +182,13 @@ int Filter() {
 	int filter;
 
 	if (filter = 1) {
-		//
+		//sort by 
 	}
 	if (filter = 2) {
-		//
+		//sort by 
 	}
 	if (filter = 3) {
-		//
+		//sort by
 	}
 }
 
