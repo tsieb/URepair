@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdlib.h>
+#include <cstdlib>
 using namespace std;
 
 class User {
@@ -52,49 +54,28 @@ public:
 	string setAddress(string a) {
 		address = a;
 	}
+	
 	bool Type();
 	string login();
 	void DeleteAccount();
 	void CreateAccount();
+
 };
-//	
-	string User::getName() {
-		return name;
-	}
-	string User::getType() {
-		return type;
-	}
-	string User::getPhone() {
-		return phone;
-	}
-	string User::getEmail() {
-		return email;
-	}
-	string User::getAddress() {
-		return address;
-	}
 
-void User::DeleteAccount() {
-
+string User::getName() {
+	return name;
 }
-
-void User::CreateAccount() {
-	//Client or Contractor (Buttons)
-	setType();
-
-	//Textbox
-	setName();
-	setPhone();
-	setEmail();
-	setAddress();
-
-	Type();
-
-	ofstream account;
-	account.open("User.txt");
-
-	//Make account file
-
+string User::getType() {
+	return type;
+}
+string User::getPhone() {
+	return phone;
+}
+string User::getEmail() {
+	return email;
+}
+string User::getAddress() {
+	return address;
 }
 
 bool Type() {
@@ -127,16 +108,16 @@ private:
 
 public:
 	int getTime(); //Grab from computer clock
-	string getLocation();
 	int getPrice();
 	int getStatus();
+	string getLocation();
 	string getDesc();
 	string getTitle();
 
 	int setTime();
-	string setLocation();
 	int setPrice();
 	int setStatus();
+	string setLocation();
 	string setDesc();
 	string setTitle();
 
@@ -158,37 +139,73 @@ public:
 	string setTitle(string t) {
 		title = t; //Alternative variable may be needed
 	}
-//	
-	}
-	int Job::getTime() {
+
+	int getTime() {
 		return time;
 	}
-	string Job::getLocation() {
+	string getLocation() {
 		return location;
 	}
-	int Job::getPrice() {
+	int getPrice() {
 		return price;
 	}
-	int Job::getStatus() {
+	int getStatus() {
 		return status;
 	}
-	string Job::getDesc() {
+	string getDesc() {
 		return desc;
 	}
+	string getTitle() {
+		return title;
+	}
+
 }
+
+struct Node {
+	int price;
+
+	struct Node* next;
+};
 
 int Filter() {
 
 	int filter;
 
 	if (filter = 1) {
-		//sort by 
+		//date
+		ifstream joblist;
+		do {
+
+		//Job at the top of the file is the earliest, so display jobs in order from top to
+		//bottom
+
+		} while (!joblist.eof());
+		joblist.close; //When user is done viewing joblist
 	}
 	if (filter = 2) {
-		//sort by 
+		//price
+		ifstream joblist;
+		joblist.open("Jobs.txt");
+		if (!joblist) {
+			return -1; //Error
+		}
+		while (!joblist.eof()) {
+		
+		//Find prices for each job (line), then sort each price from lowest to highest (or 
+		//vice versa), finally sorting the jobs based on sorted prices (suggestion: linked
+		list) 
+	
+		}
+		joblist.close; //When user is done viewing joblist
 	}
 	if (filter = 3) {
-		//sort by
+		//type
+		ifstream joblist;
+		joblist.open("Jobs.txt");
+		if (!joblist) {
+			return -1;
+		}
+		joblist.close; //When user is done viewing joblist
 	}
 }
 
@@ -214,7 +231,7 @@ void AddJob() {
 	
 	if (joblist.open()) {
 		joblist << " \n";
-			joblist.close();
+		joblist.close();
 	}
 
 	else {
