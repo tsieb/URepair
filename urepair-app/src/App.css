@@ -12,7 +12,7 @@
 #leftCol {
   position: fixed;
   background-color: rgb(63, 65, 97);
-  width: 10%;
+  width: 20%;
   height: 100%;
   left:0;
   overflow-y: hidden;
@@ -21,7 +21,7 @@
 #centreCol {
   position: fixed;
   background-color: rgb(19, 22, 39);
-  width: 60%;
+  width: 50%;
   right:30%;
   height: 100%;
   overflow: auto;
@@ -33,5 +33,19 @@
   height: 100%;
   right:0;
   overflow-y: hidden;
+}
+
+.ActionMenu {
+  display: block;
+  float: left;
+}
+
+input {
+  width: 95%
+}
+
+textarea#desc {
+  width: 95%;
+  resize: vertical;
 }
 
