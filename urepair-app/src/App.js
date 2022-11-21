@@ -3,9 +3,9 @@ import './App.css';
 
 import axios from "axios";
 
-import ClientJobs from './ClientJobs';
-import ClientInfo from './ClientInfo';
-import ActionMenu from './ActionMenu';
+
+import ClientApp from './ClientApp';
+import ContractorApp from './ContractorApp';
 
 
 const client = axios.create({
@@ -15,8 +15,11 @@ const client = axios.create({
 
 
 function App() {
-   const [uid, setUid] = useState('');
+   const [waitingForUid, setWaitingForUid] = useState(false);
+   const [isClient, setIsClient] = useState(true);
 
+   //TODO - SET DEFAULT BACK TO AN EMPTY STRING
+   const [uid, setUid] = useState('0');
    const [jobs, setJobs] = useState([]);
 
 
@@ -45,6 +48,8 @@ function App() {
       });
       setJobs((jobs) => [response.data, ...jobs]);
    };
+
+   
    /*
    const handleSubmit = (e) => {
       e.preventDefault();
@@ -52,28 +57,47 @@ function App() {
    };
    */
 
+   const handleInput = event => {
+      setUid(event.target.value);
+   };
+
+   const enableContractorView = () => {
+      setWaitingForUid(true);
+      setIsClient(false);
+   };
+
+   const enableClientView = () => {
+      setWaitingForUid(true);
+      setIsClient(true);
+   };
+
    return (
       <div className='App'>
-         <div id='appHeader'>
-            Logo and top bar
-         </div>
-         <div id='leftCol'>
-            <ActionMenu
-               addJob={addJob}
-            />
-         </div>
-         <div id='centreCol'>
-            <ClientJobs
-               deleteJob={deleteJob}
-               fetchJobs={fetchJobs}
-               jobs={jobs}
-            />
-         </div>
-         <div id='rightCol'>
-            <ClientInfo 
-               setUid={setUid}
-            />
-         </div>
+         {
+            waitingForUid ?
+               isClient ?
+                  <ClientApp
+                     addJob={addJob}
+                     deleteJob={deleteJob}
+                     fetchJobs={fetchJobs}
+                     jobs={jobs}
+                     uid={uid}
+                  />
+                  :
+                  <ContractorApp
+
+                  />
+               :
+               <form>
+                  <label>
+                     User Identification Number :
+                     <input type="number" value={uid} id='uidInput' onChange={handleInput} />
+                  </label>
+                  <button onClick={enableClientView}>Client</button>
+                  <button onClick={enableContractorView}>Contractor</button>
+               </form>
+         }
+
       </div>
    );
 };

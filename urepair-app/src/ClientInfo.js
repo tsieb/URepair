@@ -6,12 +6,12 @@ function ClientInfo(props) {
    return (
       <div className='ClientInfo'>
          <div className='border'>
-            <header>
-               Name
-            </header>
-            <h4>
-               Contact info
-            </h4>
+            <div className="name">
+               Name standin
+            </div>
+            <div className='uid'>
+               {props.uid}
+            </div>
          </div>
       </div>
    )

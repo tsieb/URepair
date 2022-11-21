@@ -8,24 +8,6 @@ function ActionMenu(props) {
     return (
        <div className='ActionMenu'>
           <div className='border'>
-             <button>
-                button
-             </button>
-             <button>
-                button
-             </button>
-             <button>
-                button
-             </button>
-             <button>
-                button
-             </button>
-             <button>
-                button
-             </button>
-             <button>
-                button
-             </button>
              <PostForm 
                 addJob={props.addJob}
              />
