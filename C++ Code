@@ -57,8 +57,6 @@ public:
 	
 	bool Type();
 	string login();
-	void DeleteAccount();
-	void CreateAccount();
 
 };
 
@@ -163,9 +161,14 @@ public:
 
 struct Node {
 	int price;
-
+	string price;
 	struct Node* next;
 };
+
+void data_storage() {
+	//temp array to store current data w/ .txt as backup
+	
+}
 
 int Filter() {
 
@@ -173,39 +176,42 @@ int Filter() {
 
 	if (filter = 1) {
 		//date
+		string line;
 		ifstream joblist;
-		do {
-
-		//Job at the top of the file is the earliest, so display jobs in order from top to
-		//bottom
-
-		} while (!joblist.eof());
-		joblist.close; //When user is done viewing joblist
+		while (!joblist.eof()) {
+			cout << line << '\n';
+		}
+		if (joblist.close()) {
+			//Go to account dashboard
+		}
 	}
 	if (filter = 2) {
 		//price
 		ifstream joblist;
 		joblist.open("Jobs.txt");
-		if (!joblist) {
-			return -1; //Error
-		}
-		while (!joblist.eof()) {
 		
-		//Find prices for each job (line), then sort each price from lowest to highest (or 
-		//vice versa), finally sorting the jobs based on sorted prices (suggestion: linked
-		list) 
-	
+		while (!joblist.eof()) {
+			
+			
+
 		}
-		joblist.close; //When user is done viewing joblist
+		if (joblist.close()) {
+			//Go to account dashboard
+		}
 	}
 	if (filter = 3) {
 		//type
 		ifstream joblist;
 		joblist.open("Jobs.txt");
-		if (!joblist) {
-			return -1;
+		
+		
+		while (!joblist.eof()) {
+			
 		}
-		joblist.close; //When user is done viewing joblist
+
+		if (joblist.close()) {
+			//Go to account dashboard
+		}
 	}
 }
 
@@ -218,7 +224,6 @@ void ViewJob() {
 	while (getline(joblist, line)) {
 			cout << line << '\n';
 		}
-		joblist.close();
 
 		if (joblist.close()) {
 			//Go to account dashboard
@@ -245,11 +250,9 @@ int main() {
 
 	//Insert file info
 
+	User user;	
+
 	Job job;
-
-	job.AddJob(" ");
-
-	job.ViewJob(" ");
 
 	return 0;
 }
