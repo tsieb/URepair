@@ -137,27 +137,27 @@ public:
 	string setTitle(string t) {
 		title = t; //Alternative variable may be needed
 	}
-
-	int getTime() {
-		return time;
-	}
-	string getLocation() {
-		return location;
-	}
-	int getPrice() {
-		return price;
-	}
-	int getStatus() {
-		return status;
-	}
-	string getDesc() {
-		return desc;
-	}
-	string getTitle() {
-		return title;
-	}
-
+};
+	
+int Job::getTime() {
+	return time;
 }
+string Job::getLocation() {
+	return location;
+}
+int Job::getPrice() {
+	return price;
+}
+int Job::getStatus() {
+	return status;
+}
+string Job::getDesc() {
+	return desc;
+}
+string Job::getTitle() {
+	return title;
+}
+
 
 struct Node {
 	int price;
