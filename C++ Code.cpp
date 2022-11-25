@@ -24,12 +24,14 @@ private:
 	
 public:
 	string getName();
+	string getUsername();
 	string getType();
 	string getPhone();
 	string getEmail();
 	string getAddress();
 
 	string setName();
+	string setUsername();
 	string setType();
 	string setPhone();
 	string setEmail();
@@ -38,7 +40,9 @@ public:
 	string setName(string n) {
 		name = n;
 	}
-
+	string getUsername(string u){
+		username = u;
+	}
 	string setType(string t) {
 		type = t; 
 	}
@@ -62,6 +66,9 @@ public:
 
 string User::getName() {
 	return name;
+}
+string getUsername(){
+	return username;
 }
 string User::getType() {
 	return type;
