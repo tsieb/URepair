@@ -174,7 +174,7 @@ struct Node {
 
 void data_storage() {
 	//temp array to store current data w/ .txt as backup
-	
+	//array[]={};
 }
 
 int Filter() {
