@@ -3,6 +3,8 @@
 #include <string>
 #include <stdlib.h>
 #include <cstdlib>
+#include <"User.h">
+#include <"Job.h">
 using namespace std;
 
 class User {
