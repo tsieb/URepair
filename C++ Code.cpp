@@ -174,9 +174,10 @@ struct Node {
 	struct Node* next;
 };
 
-void data_storage() {
+template<typename Type>
+void data_storage(Type data) {
 	//temp array to store current data w/ .txt as backup
-	//array[]={};
+	//array[6]={data};
 }
 
 int Filter() {
