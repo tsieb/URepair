@@ -6,11 +6,12 @@
 #include <vector>
 #include <mutex>
 
+namespace URepairdb{
 void addUser(){
   
 }
 
-void viewUser(){
+void editUser(){
   
 }
 
@@ -29,6 +30,8 @@ void viewJob(){
 void deleteJob(){
   
 }
+  
+} // namespace URepairdb
 
 int main(){
   
