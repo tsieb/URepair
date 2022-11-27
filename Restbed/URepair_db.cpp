@@ -64,7 +64,8 @@ JobDb job_load()
 UserDb use_load()
     {
         UserDb u_db;
-        db.emplace_back(fromJson(R"json({"username":"John_Doe1234","name":"John Doe","address":"1234 Seymour Street, Kamloops, BC, A1C 2C3","email":john_doe@urepair.ca,"phone":2503161234,"type":"Customer"})json"));
+        db.emplace_back(fromJson(R"json({"username":"John_Doe1234","name":"John Doe","address":"1234 Seymour Street, Kamloops, BC, A1C 2C3",
+        "email":john_doe@urepair.ca,"phone":2503161234,"type":"customer"})json"));
         {
             User user;
             user.username = "John_Doe1234";
@@ -72,7 +73,7 @@ UserDb use_load()
             user.address = "1234 Seymour Street, Kamloops, BC, A1C 2C3";
             user.email = "john_doe@urepair.ca";
             user.phone = "2503161234";
-            user.type = "Customer";
+            user.type = "customer";
             db.push_back(user);
         }
         return u_db;
