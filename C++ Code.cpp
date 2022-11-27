@@ -177,7 +177,7 @@ struct Node {
 template<typename Type>
 void data_storage(Type data) {
 	//temp array to store current data w/ .txt as backup
-	//array[6]={data};
+	//Type array[6]={data};
 }
 
 int Filter() {
