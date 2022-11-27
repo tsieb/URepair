@@ -47,14 +47,14 @@ JobDb job_load()
     {
         JobDb db;
         db.emplace_back(fromJson(
-            R"json({"title":"","desc":"","location":"","status":1,"price":150,"time":0})json"));
+            R"json({"title":"Job Title","desc":"Job Description","location":"Job Location","status":1,"price":0,"time":0})json"));
         {
             Job job;
-            job.title = "The Fantastic Four";
-            job.desc = "";
-            job.location = "";
+            job.title = "Job Title";
+            job.desc = "Job Description";
+            job.location = "Job Location";
             job.status = 1;
-            job.price = 150;
+            job.price = 0;
             job.time = 0;
             db.push_back(job);
         }
@@ -66,14 +66,14 @@ UserDb use_load()
         UserDb u_db;
         db.emplace_back(fromJson(R"json({"username":"John_Doe1234","name":"John Doe","address":"1234 Seymour Street, Kamloops, BC, A1C 2C3","email":john_doe@urepair.ca,"phone":2503161234,"type":"Customer"})json"));
         {
-            Job job;
-            job.username = "John_Doe1234";
-            job.name = "John Doe";
-            job.address = "1234 Seymour Street, Kamloops, BC, A1C 2C3";
-            job.email = "john_doe@urepair.ca";
-            job.phone = "2503161234";
-            job.type = "Customer";
-            db.push_back(job);
+            User user;
+            user.username = "John_Doe1234";
+            user.name = "John Doe";
+            user.address = "1234 Seymour Street, Kamloops, BC, A1C 2C3";
+            user.email = "john_doe@urepair.ca";
+            user.phone = "2503161234";
+            user.type = "Customer";
+            db.push_back(user);
         }
         return u_db;
     }   
@@ -92,7 +92,7 @@ void notAcceptable(const SessionPtr& session, const std::string& msg)
   {"Content-Length", std::to_string(msg.size())} });
 }
 
-bool validId(const SessionPtr &session, const JobDb &db, std::size_t &id)
+bool job_validId(const SessionPtr &session, const JobDb &db, std::size_t &id)
 {
     const auto &request = session->get_request();
     if (request->has_path_parameter("id"))
@@ -111,6 +111,25 @@ bool validId(const SessionPtr &session, const JobDb &db, std::size_t &id)
     return false;
 }
 
+bool user_validId(const SessionPtr &session, const UserDb &u_db, std::size_t &id)
+{
+    const auto &request = session->get_request();
+    if (request->has_path_parameter("id"))
+    {
+        id = request->get_path_parameter("id", 0);
+        if (id < u_db.size() && u_db[id].issue != User::DELETED_ISSUE)
+        {
+            return true;
+        }
+        notAcceptable(session, "Not Acceptable, id out of range");
+    }
+    else
+    {
+        notAcceptable(session, "Not Acceptable, missing id");
+    }
+    return false;
+}    
+    
 void addJob(const SessionPtr& session, ComicDb& db){
   auto& request = session->get_request();
   std::size_t length{};
@@ -298,10 +317,18 @@ void runService()
     {
         JobDb db = job_load();
         UserDb u_db = use_load();
+    
         restbed::Service job_service;
-        publishResources(service, db);
+        restbed::Service user_service;
+    
+        publishResources(job_service, db);
+        publishResources(user_service, u_db);
+    
         job_service.set_logger(std::make_shared<CustomLogger>());
         job_service.start(getSettings());
+    
+        user_service.set_logger(std::make_shared<CustomLogger>());
+        user_service.start(getSettings());
     }                 
                  
 }//namespace URepairdb
