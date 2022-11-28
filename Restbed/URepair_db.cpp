@@ -131,7 +131,7 @@ bool user_validId(const SessionPtr &session, const UserDb &u_db, std::size_t &id
     return false;
 }    
     
-void addJob(const SessionPtr& session, ComicDb& db){
+void addJob(const SessionPtr& session, JobDb& db){
   auto& request = session->get_request();
   std::size_t length{};
   length = request->get_header("Content-Length", length);
