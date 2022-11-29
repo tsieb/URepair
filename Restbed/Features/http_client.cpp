@@ -46,3 +46,4 @@ int main( const int, const char** )
 
     return EXIT_SUCCESS;
 }
+//Additional resources: https://github.com/LegalizeAdulthood/comicsdb-restbed/tree/master/examples 
