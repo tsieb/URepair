@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import PostForm from './PostForm';
+import JobForm from './JobForm';
 
 
 function ActionMenu(props) {
@@ -8,7 +8,7 @@ function ActionMenu(props) {
     return (
        <div className='ActionMenu'>
           <div className='border'>
-             <PostForm 
+             <JobForm 
                 addJob={props.addJob}
              />
           </div>

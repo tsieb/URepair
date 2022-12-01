@@ -1,4 +1,4 @@
-.App {
+ .App {
   text-align: center;
   background-color: #282c34;
   color: white;
@@ -41,8 +41,17 @@
   float: left;
 }
 
-input {
-  width: 95%
+#userform {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  width: 30%;
+  right: 20%;
+  left: 30%;
+}
+
+#joborm {
+  width: 95%;
 }
 
 textarea#desc {
@@ -52,4 +61,10 @@ textarea#desc {
 
 #uidInput {
   width: 15%;
+}
+
+UserForm {
+  display: flex;
+  justify-content: center;
+  width: 30%;
 }
