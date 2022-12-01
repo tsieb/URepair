@@ -29,7 +29,7 @@ function App() {
 
 
    const fetchJobs = async () => {
-      let response = await client.get('/job/' + uid);
+      let response = await client.get('/userjob/' + uid);
       setJobs(response.data);
    };
 
@@ -52,6 +52,7 @@ function App() {
          description: desc,
          price: price,
          userid: uid,
+         contractorid: -1
       });
       setJobs((jobs) => [response.data, ...jobs]);
    };

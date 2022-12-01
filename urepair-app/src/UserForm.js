@@ -11,7 +11,7 @@ function UserForm(props) {
          phone: ''
       },
       onSubmit: values => {
-         props.addUser(values.name, values.email, values.address, values.phone);
+         props.addJob(values.name, values.email, values.address, values.phone);
          props.enableLoginView();
       },
    });
