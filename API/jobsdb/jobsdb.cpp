@@ -96,7 +96,9 @@ std::shared_ptr<restbed::Settings> getSettings()
 {
     auto settings = std::make_shared<restbed::Settings>();
     settings->set_default_header("Connection", "close");
-    settings->set_port(3000);
+    settings->set_default_header("Access-Control-Allow-Origin", "*");
+    settings->set_default_header("Access-Control-Allow-Headers", "*");
+    settings->set_port(80);
     return settings;
 }
 
@@ -199,7 +201,7 @@ void readUserJobs(const SessionPtr &session, const jobdb &db)
                 ss << "\"userid\":" + std::to_string(iter->userid) + ",";
                 ss << "\"contractorid\":" + std::to_string(iter->contractorid) +
                           ",";
-                ss << "\"status:\"" + std::to_string(iter->status);
+                ss << "\"status\":" + std::to_string(iter->status);
                 ss << "}";
             }
         }
@@ -214,42 +216,40 @@ void readUserJobs(const SessionPtr &session, const jobdb &db)
 void readFilteredJobs(const SessionPtr &session, const jobdb &db)
 {
     std::size_t id{};
-    if (validId(session, db, id))
+    const auto &request = session->get_request();
+    std::stringstream ss;
+    int minval = request->get_path_parameter("min", 0);
+    ss.clear();
+    ss << "[";
+    for (auto iter = db.begin(); iter != db.end(); iter++)
     {
-        const auto &request = session->get_request();
-        std::stringstream ss;
-        int minval = request->get_path_parameter("min", 0);
-        ss.clear();
-        ss << "[";
-        for (auto iter = db.begin(); iter != db.end(); iter++)
+        if (std::stoi(iter->price) >= minval && iter->status != Job::DELETED_JOB)
         {
-            if (std::stoi(iter->price) >= minval && iter->status != Job::DELETED_JOB)
+            if (ss.str() != "[")
             {
-                if (ss.str() != "[")
-                {
-                    ss << ",";
-                }
-                ss << "{";
-                ss << "\"id\":\"" + std::to_string(iter - db.begin()) + "\",";
-                ss << "\"title\":\"" + iter->title + "\",";
-                ss << "\"price\":\"" + iter->price + "\",";
-                ss << "\"description\":\"" + iter->description + "\",";
-                ss << "\"location\":\"" + iter->location + "\",";
-                ss << "\"start_time\":\"" + iter->start_time + "\",";
-                ss << "\"end_time\":\"" + iter->end_time + "\",";
-                ss << "\"userid\":" + std::to_string(iter->userid) + ",";
-                ss << "\"contractorid\":" + std::to_string(iter->contractorid) + ",";
-                ss << "\"status\":" + std::to_string(iter->status);
-                ss << "}";
+                ss << ",";
             }
+            ss << "{";
+            ss << "\"id\":\"" + std::to_string(iter - db.begin()) + "\",";
+            ss << "\"title\":\"" + iter->title + "\",";
+            ss << "\"price\":\"" + iter->price + "\",";
+            ss << "\"description\":\"" + iter->description + "\",";
+            ss << "\"location\":\"" + iter->location + "\",";
+            ss << "\"start_time\":\"" + iter->start_time + "\",";
+            ss << "\"end_time\":\"" + iter->end_time + "\",";
+            ss << "\"userid\":" + std::to_string(iter->userid) + ",";
+            ss << "\"contractorid\":" + std::to_string(iter->contractorid) + ",";
+            ss << "\"status\":" + std::to_string(iter->status);
+            ss << "}";
         }
-        ss << "]";
-        const std::string json = ss.str();
-        session->close(restbed::OK, json,
-                       {{"Content-Type", "application/json"},
-                        {"Content-Length", std::to_string(json.size())}});
     }
+    ss << "]";
+    const std::string json = ss.str();
+    session->close(restbed::OK, json,
+                    {{"Content-Type", "application/json"},
+                    {"Content-Length", std::to_string(json.size())}});
 }
+
 
 void readAcceptedJobs(const SessionPtr &session, const jobdb &db)
 {
@@ -461,6 +461,9 @@ void publishJobResources(restbed::Service &service, jobdb &db)
     createJobResource->set_path("/job");
     createJobResource->set_method_handler("POST", [&db](const SessionPtr &session)
                                     { return createJob(session, db); });
+    createJobResource->set_method_handler("OPTIONS",
+                                          [&db](const SessionPtr &session)
+        { return session->close(restbed::OK); });
     service.publish(createJobResource);
 
     // Resource for accessing jobs by user id
